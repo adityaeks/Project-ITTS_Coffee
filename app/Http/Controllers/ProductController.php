@@ -77,12 +77,15 @@ class ProductController extends Controller
      * Menampilkan form untuk mengedit produk.
      */
     public function edit($id)
-    {
-        $product = Product::find($id);
-        $pageTitle = 'Edit Produk: ' . $product->name;
+{
+    $product = Product::find($id);
+    $pageTitle = 'Edit Produk: ' . $product->name;
 
-        return view('products.edit', compact('pageTitle', 'product'));
-    }
+    $categories = DB::table('kategorys')->get();
+    $subcategories = DB::table('subkategorys')->get();
+
+    return view('products.edit', compact('pageTitle', 'product', 'categories', 'subcategories'));
+}
 
     /**
      * Memperbarui produk yang ada di dalam database.

@@ -18,5 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('products/food', [ProductController::class, 'food'])->name('products.food');
 Route::resource('products', ProductController::class);
 
