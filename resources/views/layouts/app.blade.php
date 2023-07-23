@@ -14,7 +14,11 @@
 </head>
 
 <body>
+    @vite('resources/sass/app.scss')
     @yield('Content')
+    @vite('resources/js/app.js')
+    @include('sweetalert::alert')
+    @stack('scripts')
 </body>
 
 </html>

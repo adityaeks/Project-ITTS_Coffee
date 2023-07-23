@@ -22,3 +22,8 @@ Route::get('products/food', [ProductController::class, 'food'])->name('products.
 Route::get('products/drink', [ProductController::class, 'drink'])->name('products.drink');
 Route::resource('products', ProductController::class);
 
+
+
+Route::get('exportExcel', [ProductController::class, 'exportExcel'])->name('products.exportExcel');
+
+
