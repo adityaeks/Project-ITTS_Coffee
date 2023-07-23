@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductsExport;
 
 class ProductController extends Controller
 {
@@ -59,6 +62,7 @@ class ProductController extends Controller
         $product->subKategorys_id = $request->subkategory; // Pastikan kolom subkategorys sesuai di tabel
 
         $product->save();
+        Alert::success('Added Successfully', 'Employee Data Added Successfully.');
 
         return redirect()->route('products.index')->with('success', 'Produk telah ditambahkan');
     }
@@ -108,6 +112,8 @@ class ProductController extends Controller
 
         $product->save();
 
+        Alert::success('Changed Successfully', 'Employee Data Changed Successfully.');
+
         return redirect()->route('products.index')->with('success', 'Produk telah diperbarui');
     }
 
@@ -118,6 +124,8 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
+
+        Alert::success('Deleted Successfully', 'Employee Data Deleted Successfully.');
 
         return redirect()->route('products.index')->with('success', 'Produk telah dihapus');
     }
@@ -140,5 +148,11 @@ class ProductController extends Controller
 
     return view('products.drink', compact('pageTitle', 'products'));
 }
+public function exportExcel()
+{
+    return Excel::download(new ProductsExport, 'products.xlsx');
+}
+
+
 
 }
