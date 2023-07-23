@@ -1,4 +1,4 @@
 @extends('layouts.app')
 @section('Content')
-    <h1>tes</h1>
+<h2>product</h2>
 @endsection
