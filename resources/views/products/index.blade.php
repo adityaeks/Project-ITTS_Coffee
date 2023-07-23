@@ -25,33 +25,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Purnama</td>
-                        <td>Anaking</td>
-                        <td>purnama.anaking@gmail.com</td>
-                        <td>20</td>
-                        <td>tes</td>
-                        <td>
-                            <div class="d-flex">
-                                <a href="#" class="btn btn-outline-dark btn-sm me-2"><i
-                                        class="bi-person-lines-fill"></i></a>
-                                <a href="#" class="btn btn-outline-dark btn-sm me-2"><i
-                                        class="bi-pencil-square"></i></a>
+                    @if (!empty($products) && count($products) > 0)
+                        @foreach ($products as $product)
+                            <tr>
+                                <td><img style="width: 100px" src="{{ asset('images/' . $product->image) }}" alt="tes">
+                                </td>
+                                <td>{{ $product->name }}</td>
+                                <td>{{ $product->price }}</td>
+                                <td>{{ $product->kategorys }}</td>
+                                <td>{{ $product->subKategorys }}</td>
 
-                                <div>
-                                    <form action="#" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-outline-dark btn-sm me-2"><i
-                                                class="bi-trash"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-
+                                <td>
+                                    <div class="d-flex">
+                                        {{-- <a href="#" class="btn btn-outline-dark btn-sm me-2"><i
+                                            class="bi-person-lines-fill"></i></a> --}}
+                                        <a href="{{ route('products.edit', $product->id) }}"
+                                            class="btn btn-outline-dark btn-sm me-2"><i class="bi-pencil-square"></i></a>
+                                        <div>
+                                            <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-outline-dark btn-sm me-2"><i
+                                                        class="bi-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
     </div>
 @endsection
+    

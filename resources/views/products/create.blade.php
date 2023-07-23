@@ -4,7 +4,7 @@
 
 
     <div class="container-sm mt-5">
-        <form action="#" method="POST">
+        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row justify-content-center">
                 <div class="p-5 bg-light rounded-3 border col-xl-6">

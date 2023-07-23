@@ -2,27 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan daftar produk.
      */
     public function index()
     {
-        $pageTitle = 'List Product';
+        $pageTitle = 'Daftar Produk';
+        $products = Product::all();
 
-        return view('products.index', compact('pageTitle'));
+        return view('products.index', compact('pageTitle', 'products'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Menampilkan form untuk membuat produk baru.
      */
     public function create()
     {
-        $pageTitle = 'Create Product';
+        $pageTitle = 'Tambah Produk Baru';
         $categories = DB::table('kategorys')->get();
         $subcategories = DB::table('subkategorys')->get();
 
@@ -30,42 +32,90 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Menyimpan produk baru ke dalam database.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'kategory' => 'required',
+            'subkategory' => 'required',
+        ]);
+
+        $product = new Product();
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $file_name = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images'), $file_name);
+            $product->image = $file_name;
+        }
+
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->kategorys = $request->kategory; // Pastikan kolom kategorys sesuai di tabel
+        $product->subkategorys = $request->subkategory; // Pastikan kolom subkategorys sesuai di tabel
+
+        $product->save();
+
+        return redirect()->route('products.index')->with('success', 'Produk telah ditambahkan');
     }
 
     /**
-     * Display the specified resource.
+     * Menampilkan detail produk.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $product = Product::find($id);
+
+        return view('products.show', compact('product'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Menampilkan form untuk mengedit produk.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $pageTitle = 'Edit Produk: ' . $product->name;
+
+        return view('products.edit', compact('pageTitle', 'product'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Memperbarui produk yang ada di dalam database.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'kategory' => 'required',
+            'subkategory' => 'required',
+        ]);
+
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->kategorys = $request->kategory; // Pastikan kolom kategorys sesuai di tabel
+        $product->subkategorys = $request->subkategory; // Pastikan kolom subkategorys sesuai di tabel
+
+        $product->save();
+
+        return redirect()->route('products.index')->with('success', 'Produk telah diperbarui');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Menghapus produk dari database.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+
+        return redirect()->route('products.index')->with('success', 'Produk telah dihapus');
     }
 }
