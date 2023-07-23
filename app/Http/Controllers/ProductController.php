@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -21,9 +22,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $pageTitle = 'List Product';
+        $pageTitle = 'Create Product';
+        $categories = DB::table('kategorys')->get();
+        $subcategories = DB::table('subkategorys')->get();
 
-        return view('products.create', compact('pageTitle'));
+        return view('products.create', compact('pageTitle', 'categories', 'subcategories'));
     }
 
     /**
