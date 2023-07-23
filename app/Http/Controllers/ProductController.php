@@ -11,7 +11,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $pageTitle = 'List Product';
+
+        return view('products.index', compact('pageTitle'));
     }
 
     /**
@@ -19,7 +21,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $pageTitle = 'List Product';
+
+        return view('products.create', compact('pageTitle'));
     }
 
     /**
