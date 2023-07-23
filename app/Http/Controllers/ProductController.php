@@ -55,8 +55,8 @@ class ProductController extends Controller
 
         $product->name = $request->name;
         $product->price = $request->price;
-        $product->kategorys = $request->kategory; // Pastikan kolom kategorys sesuai di tabel
-        $product->subkategorys = $request->subkategory; // Pastikan kolom subkategorys sesuai di tabel
+        $product->kategorys_id = $request->kategory; // Pastikan kolom kategorys sesuai di tabel
+        $product->subKategorys_id = $request->subkategory; // Pastikan kolom subkategorys sesuai di tabel
 
         $product->save();
 
@@ -103,8 +103,8 @@ class ProductController extends Controller
 
         $product->name = $request->name;
         $product->price = $request->price;
-        $product->kategorys = $request->kategory; // Pastikan kolom kategorys sesuai di tabel
-        $product->subkategorys = $request->subkategory; // Pastikan kolom subkategorys sesuai di tabel
+        $product->kategorys_id = $request->kategory; // Pastikan kolom kategorys sesuai di tabel
+        $product->subkategorys_id = $request->subkategory; // Pastikan kolom subkategorys sesuai di tabel
 
         $product->save();
 
@@ -121,4 +121,24 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Produk telah dihapus');
     }
+
+    public function food()
+{
+    $pageTitle = 'Food';
+    $products = Product::whereHas('kategory', function ($query) {
+        $query->where('name', 'Food');
+    })->get();
+
+    return view('products.food', compact('pageTitle', 'products'));
+}
+    public function drink()
+{
+    $pageTitle = 'Drink';
+    $products = Product::whereHas('kategory', function ($query) {
+        $query->where('name', 'Drink');
+    })->get();
+
+    return view('products.drink', compact('pageTitle', 'products'));
+}
+
 }

@@ -32,8 +32,8 @@
                                 </td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->price }}</td>
-                                <td>{{ $product->kategorys }}</td>
-                                <td>{{ $product->subKategorys }}</td>
+                                <td>{{ $product->kategorys_id }}</td>
+                                <td>{{ $product->subKategorys_id }}</td>
 
                                 <td>
                                     <div class="d-flex">
@@ -59,4 +59,3 @@
         </div>
     </div>
 @endsection
-    

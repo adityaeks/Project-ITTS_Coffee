@@ -19,5 +19,6 @@ Route::get('/', function () {
 });
 
 Route::get('products/food', [ProductController::class, 'food'])->name('products.food');
+Route::get('products/drink', [ProductController::class, 'drink'])->name('products.drink');
 Route::resource('products', ProductController::class);
 

@@ -12,7 +12,7 @@ class Product extends Model
     // Relasi dengan Kategory
     public function kategory()
     {
-        return $this->belongsTo(Kategory::class, 'kategorys');
+        return $this->belongsTo(Kategory::class, 'kategorys_id');
     }
 
     // Relasi dengan Subkategory
