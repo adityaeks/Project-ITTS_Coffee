@@ -32,10 +32,10 @@
                     @if (!empty($products) && count($products) > 0)
                         @foreach ($products as $product)
                             <tr>
-                                <td><img style="width: 100px" src="{{ asset('images/' . $product->image) }}" alt="tes">
+                                <td><img class="image" src="{{ asset('images/' . $product->image) }}" alt="tes">
                                 </td>
                                 <td>{{ $product->name }}</td>
-                                <td>{{ $product->price }}</td>
+                                <td>{{ number_format($product->price, 0, ',', '.') }}</td>
                                 <td>{{ $product->kategorys_id }}</td>
                                 <td>{{ $product->subKategorys_id }}</td>
 

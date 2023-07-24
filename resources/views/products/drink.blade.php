@@ -4,7 +4,7 @@
         <div class="row">
             @if (!empty($products) && count($products) > 0)
                 @foreach ($products as $product)
-                    <div class="col-md-2 mb-4">
+                    <div class="col md-1 mb-4">
                         <div class="card square-card">
                             <img src="{{ asset('images/' . $product->image) }}" class="card-img-top square-img" alt="Gambar">
                             <div class="card-body">
@@ -20,15 +20,3 @@
         </div>
     </div>
 @endsection
-
-<style>
-    .square-card {
-        width: 100%;
-    }
-
-    .square-img {
-        width: 100%;
-        height: 150px; /* Sesuaikan tinggi yang diinginkan */
-        object-fit: cover;
-    }
-</style>

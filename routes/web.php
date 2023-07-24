@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,18 @@ Route::get('products/food', [ProductController::class, 'food'])->name('products.
 Route::get('products/drink', [ProductController::class, 'drink'])->name('products.drink');
 Route::resource('products', ProductController::class);
 
-
-
 Route::get('exportExcel', [ProductController::class, 'exportExcel'])->name('products.exportExcel');
+
+// coba
+
+Route::get('/upload-example', function() {
+    return view('upload_example');
+});
+
+Route::post('/upload-example', function(Request $request) {
+    $path = $request->file('avatar')->store('public');
+    return $path;
+})->name('upload-example');
+
 
 
