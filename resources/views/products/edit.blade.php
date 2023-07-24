@@ -54,10 +54,9 @@
                             <label for="subkategory" class="form-label">Sub kategory</label>
                             <select name="subkategory" class="form-select" required>
                                 <option value="" disabled selected>Pilih SubKategori</option>
-
                                 @foreach ($subcategories as $subcategory)
                                     <option value="{{ $subcategory->id }}"
-                                        {{ $product->subkategorys_id == $subcategory->id ? 'selected' : '' }}>
+                                        {{ $product->subKategorys_id == $subcategory->id ? 'selected' : '' }}>
                                         {{ $subcategory->name }}
                                     </option>
                                 @endforeach
@@ -66,11 +65,6 @@
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                             @enderror
                         </div>
-                        <!-- Kategori -->
-
-
-                        <!-- Subkategori -->
-
 
                         <div class="col-md-12">
                             <label for="image" class="form-label">Foto</label>

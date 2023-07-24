@@ -36,8 +36,8 @@
                                 </td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ number_format($product->price, 0, ',', '.') }}</td>
-                                <td>{{ $product->kategorys_id }}</td>
-                                <td>{{ $product->subKategorys_id }}</td>
+                                <td>{{ $product->kategory->name }}</td>
+                                <td>{{ $product->subkategory->name }}</td>
 
                                 <td>
                                     <div class="d-flex">

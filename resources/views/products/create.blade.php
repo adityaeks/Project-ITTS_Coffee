@@ -33,6 +33,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="kategory" class="form-label">kategory</label>
                             <select name="kategory" id="kategory" class="form-select">
+                                <option value="" disabled selected>Pilih SubKategori</option>
                                 @foreach ($categories as $kategory)
                                     <option value="{{ $kategory->id }}"
                                         {{ old('kategory') == $kategory->id ? 'selected' : '' }}>
@@ -46,6 +47,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="subkategory" class="form-label">Sub kategory</label>
                             <select name="subkategory" id="subkategory" class="form-select">
+                                <option value="" disabled selected>Pilih SubKategori</option>
                                 @foreach ($subcategories as $subkategory)
                                     <option value="{{ $subkategory->id }}"
                                         {{ old('subkategory') == $subkategory->id ? 'selected' : '' }}>

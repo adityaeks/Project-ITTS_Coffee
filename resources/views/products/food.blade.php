@@ -10,8 +10,8 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $product->name }}</h5>
                                 <p class="card-text">Harga: Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                                <p class="card-text">Kategori: {{ $product->kategorys_id }}</p>
-                                <p class="card-text">Sub-Kategori: {{ $product->subKategorys_id }}</p>
+                                <p class="card-text">Kategori: {{ $product->kategory->name }}</p>
+                                <p class="card-text">Sub-Kategori: {{ $product->subKategory->name }}</p>
                             </div>
                         </div>
                     </div>
