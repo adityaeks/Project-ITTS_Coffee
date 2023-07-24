@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SuggestionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('home', [HomeController::class, 'index'])->name('home');
+
+
+
+Route::post('/suggestion', 'SuggestionController@store')->name('suggestion.store');
+Route::resource('suggestion', SuggestionController::class);
+
+// Route::post('/suggestion', [SuggestionController::class, 'store'])->name('suggestion.store');
