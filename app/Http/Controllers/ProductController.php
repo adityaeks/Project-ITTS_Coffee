@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProductsExport;
+use App\Models\Kategory;
+use App\Models\subKategory;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -59,7 +61,7 @@ class ProductController extends Controller
     $product->name = $request->name;
     $product->price = $request->price;
     $product->kategorys_id = $request->kategory; // Pastikan kolom kategorys sesuai di tabel
-    $product->subkategorys_id = $request->subkategory; // Pastikan kolom subkategorys sesuai di tabel
+    $product->subKategorys_id = $request->subkategory; // Pastikan kolom subkategorys sesuai di tabel
 
     $product->save();
 
@@ -83,7 +85,7 @@ class ProductController extends Controller
     public function edit($id)
 {
     $product = Product::find($id);
-    $product->subkategorys_id;
+    $product->subKategorys_id;
     $pageTitle = 'Edit Produk: ' . $product->name;
 
     $categories = DB::table('kategorys')->get();
@@ -109,7 +111,7 @@ class ProductController extends Controller
     $product->name = $request->name;
     $product->price = $request->price;
     $product->kategorys_id = $request->kategory;
-    $product->subkategorys_id = $request->subkategory;
+    $product->subKategorys_id = $request->subkategory;
 
     // Cek apakah ada file gambar baru diunggah
     if ($request->hasFile('image')) {

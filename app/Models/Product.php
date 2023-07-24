@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class Product extends Model
 {
     protected $table = 'products'; // Nama tabel di database
-    protected $fillable = ['name', 'price', 'kategory', 'subkategory', 'image'];
+    protected $fillable = ['name', 'price', 'kategory', 'subKategory', 'image'];
 
 
     public function storeImage(UploadedFile $file)
@@ -28,6 +28,6 @@ class Product extends Model
     // Relasi dengan Subkategory
     public function subkategory()
     {
-        return $this->belongsTo(Subkategory::class, 'subkategorys');
+        return $this->belongsTo(Subkategory::class, 'subKategorys_id');
     }
 }
