@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProductsExport;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -38,43 +39,42 @@ class ProductController extends Controller
      * Menyimpan produk baru ke dalam database.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'name' => 'required',
-            'price' => 'required|numeric',
-            'kategory' => 'required',
-            'subkategory' => 'required',
-        ]);
+{
+    $request->validate([
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:3148',
+        'name' => 'required',
+        'price' => 'required|numeric',
+        'kategory' => 'required',
+        'subkategory' => 'required',
+    ]);
 
-        $product = new Product();
+    $product = new Product();
 
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $file_name = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('images'), $file_name);
-            $product->image = $file_name;
-        }
-
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->kategorys_id = $request->kategory; // Pastikan kolom kategorys sesuai di tabel
-        $product->subKategorys_id = $request->subkategory; // Pastikan kolom subkategorys sesuai di tabel
-
-        $product->save();
-        Alert::success('Added Successfully', 'Employee Data Added Successfully.');
-
-        return redirect()->route('products.index')->with('success', 'Produk telah ditambahkan');
+    if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $file_name = $product->storeImage($file); // Simpan gambar ke direktori storage/app/public/images dan dapatkan nama filenya
+        $product->image = $file_name;
     }
+
+    $product->name = $request->name;
+    $product->price = $request->price;
+    $product->kategorys_id = $request->kategory; // Pastikan kolom kategorys sesuai di tabel
+    $product->subkategorys_id = $request->subkategory; // Pastikan kolom subkategorys sesuai di tabel
+
+    $product->save();
+
+    return redirect()->route('products.index')->with('success', 'Produk telah ditambahkan');
+}
+
 
     /**
      * Menampilkan detail produk.
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        // $product = Product::find($id);
 
-        return view('products.show', compact('product'));
+        // return view('products.show', compact('product'));
     }
 
     /**
@@ -83,6 +83,7 @@ class ProductController extends Controller
     public function edit($id)
 {
     $product = Product::find($id);
+    $product->subkategorys_id;
     $pageTitle = 'Edit Produk: ' . $product->name;
 
     $categories = DB::table('kategorys')->get();
@@ -95,27 +96,39 @@ class ProductController extends Controller
      * Memperbarui produk yang ada di dalam database.
      */
     public function update(Request $request, $id)
-    {
-        $product = Product::find($id);
+{
+    $product = Product::find($id);
 
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required|numeric',
-            'kategory' => 'required',
-            'subkategory' => 'required',
-        ]);
+    $request->validate([
+        'name' => 'required',
+        'price' => 'required|numeric',
+        'kategory' => 'required',
+        'subkategory' => 'required',
+    ]);
 
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->kategorys_id = $request->kategory; // Pastikan kolom kategorys sesuai di tabel
-        $product->subkategorys_id = $request->subkategory; // Pastikan kolom subkategorys sesuai di tabel
+    $product->name = $request->name;
+    $product->price = $request->price;
+    $product->kategorys_id = $request->kategory;
+    $product->subkategorys_id = $request->subkategory;
 
-        $product->save();
+    // Cek apakah ada file gambar baru diunggah
+    if ($request->hasFile('image')) {
+        // Hapus foto lama dari storage jika ada
+        if (!empty($product->image)) {
+            Storage::delete('images/' . $product->image);
+        }
 
-        Alert::success('Changed Successfully', 'Employee Data Changed Successfully.');
-
-        return redirect()->route('products.index')->with('success', 'Produk telah diperbarui');
+        // Unggah foto baru dan simpan nama file ke dalam database
+        $file = $request->file('image');
+        $file_name = time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('images', $file_name);
+        $product->image = $file_name;
     }
+
+    $product->save();
+
+    return redirect()->route('products.index')->with('success', 'Produk telah diperbarui');
+}
 
     /**
      * Menghapus produk dari database.
@@ -123,6 +136,12 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
+            // Hapus foto dari storage jika ada
+        if (!empty($product->image)) {
+            Storage::delete('public/images/' . $product->image);
+        }
+
+        // Hapus data produk dari database
         $product->delete();
 
         Alert::success('Deleted Successfully', 'Employee Data Deleted Successfully.');

@@ -37,10 +37,12 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="kategory" class="form-label">kategory</label>
-                            <select name="kategory" id="kategory" class="form-select">
+                            <select name="kategory" class="form-select" required>
+                                <option value="" disabled selected>Pilih Kategori</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ intval($product->kategorys) === $category->id ? 'selected' : '' }}>
-                                        {{ $category->code . ' - ' . $category->name }}
+                                    <option value="{{ $category->id }}"
+                                        {{ $product->kategorys_id == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -50,10 +52,13 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="subkategory" class="form-label">Sub kategory</label>
-                            <select name="subkategory" id="subkategory" class="form-select">
+                            <select name="subkategory" class="form-select" required>
+                                <option value="" disabled selected>Pilih SubKategori</option>
+
                                 @foreach ($subcategories as $subcategory)
-                                    <option value="{{ $subcategory->id }}" {{ intval($product->subkategorys) === $subcategory->id ? 'selected' : '' }}>
-                                        {{ $subcategory->code . ' - ' . $subcategory->name }}
+                                    <option value="{{ $subcategory->id }}"
+                                        {{ $product->subkategorys_id == $subcategory->id ? 'selected' : '' }}>
+                                        {{ $subcategory->name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -61,6 +66,12 @@
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                             @enderror
                         </div>
+                        <!-- Kategori -->
+
+
+                        <!-- Subkategori -->
+
+
                         <div class="col-md-12">
                             <label for="image" class="form-label">Foto</label>
                             <input type="file" class="form-control" id="image" name="image"
