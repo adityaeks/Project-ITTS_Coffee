@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/aboutus', function () {
+    return view('aboutus');
+});
+
 Route::get('products/food', [ProductController::class, 'food'])->name('products.food');
 Route::get('products/drink', [ProductController::class, 'drink'])->name('products.drink');
 Route::resource('products', ProductController::class);
