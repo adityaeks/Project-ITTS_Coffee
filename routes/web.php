@@ -19,6 +19,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// start route ari home
+Route::get('home', [HomeController::class, 'index'])->name('home');
+// end route ari home
+
+// start route ari suggestion
+Route::post('/suggestion', 'SuggestionController@store')->name('suggestion.store');
+Route::resource('suggestion', SuggestionController::class);
+// end route ari suggestion
 Route::get('products/food', [ProductController::class, 'food'])->name('products.food');
 Route::get('products/drink', [ProductController::class, 'drink'])->name('products.drink');
 Route::resource('products', ProductController::class);
