@@ -20,6 +20,8 @@
     display: flex;
     justify-content: center;
     gap: 1cm;
+    flex-wrap: wrap;
+    max-width: 20cm;
 }
 
 .image-slide{
