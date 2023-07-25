@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SuggestionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +20,7 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 // start route ari home
 Route::get('home', [HomeController::class, 'index'])->name('home');
@@ -43,6 +46,5 @@ Route::post('/upload-example', function(Request $request) {
     $path = $request->file('avatar')->store('public');
     return $path;
 })->name('upload-example');
-
 
 
