@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('Content')
+@extends('layouts.main')
+@section('content')
     <div class="container mt-4">
         <div class="row">
             @if (!empty($products) && count($products) > 0)
