@@ -1,0 +1,73 @@
+.nav-image{
+    background-color: rgb(203, 110, 5);
+}
+
+.text-with-image{
+    background-image: url('/resources/images/itts-4.png');
+    width: 20cm;
+    height: 5cm;
+    color: white;
+    font-weight: bolder;
+    padding-top: 1.2cm;
+    padding-left: 1cm;
+    font-family:Arial, Helvetica, sans-serif ;
+    text-align: left;
+    background-color: rgba(7, 0, 0, 0.5);
+    opacity: 0.9;
+}
+
+.product-card{
+    display: flex;
+    justify-content: center;
+    gap: 1cm;
+}
+
+.image-slide{
+    margin-top: 0.5cm;
+}
+
+.images{
+    width: 2cm;
+
+}
+
+nav{
+    background-color: rgb(122, 66, 2);
+    padding: 0;
+    margin: 0;
+}
+
+.drink{
+    margin-top: 1cm;
+}
+.snack{
+    margin-top: 1cm;
+}
+.gallery{
+    margin-top: 1cm;
+}
+
+.navbar{
+    padding-top: 9px;
+    padding-bottom: 0;
+    justify-content: center;
+}
+
+ul{
+    display: flex;
+    gap: 20px;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    font-weight: 300;
+}
+
+ li{
+    list-style: none;
+ }
+
+ a:hover{
+    color: rgb(180, 180, 180);
+ }
