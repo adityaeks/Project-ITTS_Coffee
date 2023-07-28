@@ -14,9 +14,9 @@ class SuggestionController extends Controller
     public function index()
     {
     $suggestions = Suggestion::all();
-    // $pageTitle = 'Suggestion List';
+    $pageTitle = 'Suggestion List';
 
-        return view('suggestion.index', compact(['suggestions']) );
+        return view('suggestion.index', compact(['suggestions', 'pageTitle']) );
     }
 
     /**
