@@ -9,6 +9,11 @@
 
     <link rel="stylesheet" href="{{ Vite::asset('resources/css/app.css') }}">
     @vite('resources/sass/app.scss')
+
+    <!-- Add these lines to include Bootstrap CSS and JavaScript -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body class="main">
@@ -21,9 +26,9 @@
                     <img class="main-image" src="{{ Vite::asset('resources/images/logoittscoffe.svg') }}"
                         alt="Logo">
                     @for ($i = 0; $i < 6; $i++)
-                        <img src="{{ Vite::asset('resources/images/bgnavbar.svg') }}" alt="Logo">
-                        @endfor
-                        <img src="{{ Vite::asset('resources/images/bgnavbar2.png') }}" alt="Logo">
+                        <img class="img-class" src="{{ Vite::asset('resources/images/bgnavbar.svg') }}" alt="Logo">
+                    @endfor
+                    {{-- <img src="{{ Vite::asset('resources/images/bgnavbar2.png') }}" alt="Logo"> --}}
                 </a>
             </div>
         </nav>
@@ -50,57 +55,61 @@
                             <a class="nav-link" href="{{ route('suggestion.create') }}">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">User</a>
+                            <a class="nav-link" href="{{ route('suggestion.index') }}">User</a>
+
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-{{-- end navbar --}}
+        {{-- end navbar --}}
 
-@yield('content')
+        @yield('content')
 
-    <!-- Footer -->
-   <footer class="footer navbar navbar-expand-lg" style="width: 100%; height: 140px; background-color: #A27B5C">
-    <div class="">
-        <a class="footer-brand" href="#">
-               <div class="position-absolute" style="left: 40%; top: 1; transform: translateX(-50%); z-index: 2;">
-                <ul class="list-unstyled mb-0 text-list text-white small" style="font-family: helvetica;">
-                    <li style="text-decoration: underline;">MORE LINKS</li>
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Drink</li>
-                    <li>Snack</li>
-                </ul>
+        <!-- Footer -->
+        <footer class="footer navbar navbar-expand-lg" style="width: 100%; height: 140px; background-color: #A27B5C">
+            <div class="">
+                <a class="footer-brand" href="#">
+                    <div class="position-absolute" style="left: 40%; top: 1; transform: translateX(-50%); z-index: 2;">
+                        <ul class="list-unstyled mb-0 text-list text-white small" style="font-family: helvetica;">
+                            <li style="text-decoration: underline;">MORE LINKS</li>
+                            <li>Home</li>
+                            <li>About</li>
+                            <li>Drink</li>
+                            <li>Snack</li>
+                        </ul>
+                    </div>
+                    <div class="position-absolute" style="left: 50%; top: 1; transform: translateX(-50%); z-index: 2;">
+                        <ul class="list-unstyled mb-0 text-list text-white small" style="font-family: helvetica;">
+                            <li style="text-decoration: underline;">HELP LINKS</li>
+                            <li>Contact</li>
+                        </ul>
+                    </div>
+                    <div class="position-absolute" style="left: 60%; top: 1; transform: translateX(-50%); z-index: 2;">
+                        <ul class="list-unstyled mb-0 text-list text-white small" style="font-family: helvetica;">
+                            <li style="text-decoration: underline;">PAGE ADMIN</li>
+                            <li>Admin</li>
+                        </ul>
+                    </div>
+                    <img class="footer-image" src="{{ Vite::asset('resources/images/logoittscoffe.svg') }}"
+                        alt="Logo">
+                    @for ($i = 0; $i < 3; $i++)
+                        <img src="{{ Vite::asset('resources/images/bgnavbar.svg') }}" alt="Logo"
+                            style="height: 140px; z-index: 1;">
+                    @endfor
+                    <img src="{{ Vite::asset('resources/images/bgnavbarfooter.png') }}" alt="Logo"
+                        style="height: 140px; z-index: 1;">
+                </a>
             </div>
-            <div class="position-absolute" style="left: 50%; top: 1; transform: translateX(-50%); z-index: 2;">
-                <ul class="list-unstyled mb-0 text-list text-white small" style="font-family: helvetica;">
-                    <li style="text-decoration: underline;">HELP LINKS</li>
-                    <li>Contact</li>
-                </ul>
-            </div>
-            <div class="position-absolute" style="left: 60%; top: 1; transform: translateX(-50%); z-index: 2;">
-                <ul class="list-unstyled mb-0 text-list text-white small" style="font-family: helvetica;">
-                    <li style="text-decoration: underline;">PAGE ADMIN</li>
-                    <li>Admin</li>
-                </ul>
-            </div>
-            <img class="footer-image" src="{{ Vite::asset('resources/images/logoittscoffe.svg') }}" alt="Logo">
-            @for ($i = 0; $i < 3; $i++)
-                <img src="{{ Vite::asset('resources/images/bgnavbar.svg') }}" alt="Logo" style="height: 140px; z-index: 1;">
-            @endfor
-            <img src="{{ Vite::asset('resources/images/bgnavbarfooter.png') }}" alt="Logo" style="height: 140px; z-index: 1;">
-        </a>
-    </div>
-</footer>
+        </footer>
 
-    <div class="footer navbar navbar-expand-lg" style="width: 100%; height: 40px; background-color: #6F4F36 ">
-    </div>
-    <!-- End of Footer -->
+        <div class="footer navbar navbar-expand-lg" style="width: 100%; height: 40px; background-color: #6F4F36 ">
+        </div>
+        <!-- End of Footer -->
 
 
 
-    @vite('resources/js/app.js')
+        @vite('resources/js/app.js')
 </body>
 
 </html>
