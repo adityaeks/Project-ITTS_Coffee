@@ -23,7 +23,7 @@
                         <a class="nav-link" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">About</a>
+                        <a class="nav-link" href="#">About</a>
                     </li>
 
                     <li class="nav-item">
@@ -89,10 +89,6 @@
 
 
 
-@vite('resources/js/app.js')
-</body>
-
-</html>
 @vite('resources/js/app.js')
 </body>
 
