@@ -36,7 +36,7 @@
                         <a class="nav-link" href="{{ route('suggestion.create') }}">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">User</a>
+                        <a class="nav-link" href="{{ route('suggestion.index') }}">User</a>
                     </li>
                 </ul>
             </div>
