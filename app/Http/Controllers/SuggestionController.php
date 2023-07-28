@@ -71,24 +71,39 @@ class SuggestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $suggestion = Suggestion::find($id);
+        return view('suggestion.edit', compact('suggestion'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+   public function update(Request $request, $id)
+{
+    $suggestion = Suggestion::find($id);
+
+    $suggestion->name = $request->input('name');
+    $suggestion->email = $request->input('email');
+    $suggestion->message = $request->input('message');
+
+    $suggestion->save();
+
+    return redirect()->route('suggestion.index')->with('success', 'Saran berhasil diperbarui!');
+}
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+   public function destroy($id)
+{
+    $suggestion = Suggestion::find($id);
+    if($suggestion){
+        $suggestion->delete();
+        return redirect()->route('suggestion.index')->with('success', 'Data successfully deleted');
     }
+    return back()->with('error', 'Data not found');
+}
+
 }
