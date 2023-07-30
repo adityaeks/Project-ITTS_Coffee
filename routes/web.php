@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProductController;
@@ -7,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SuggestionController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,13 +21,17 @@ use App\Http\Controllers\SuggestionController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\AuthController;
+
+Route::get('/', [LoginController::class, 'showLoginForm'])->middleware('guest');
+
+
+Auth::routes();
 
 
 // start route ari home
-Route::get('home', [HomeController::class, 'index'])->name('home');
+Route::get('home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+
 Route::get('contact', [ContactController::class, 'index'])->name('contact');
 // end route ari home
 
