@@ -46,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/', ProductController::class);
     });
 
+
     Route::get('exportExcel', [ProductController::class, 'exportExcel'])->name('products.exportExcel');
 
     // coba

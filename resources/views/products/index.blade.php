@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('Content')
+@extends('layouts.admin')
+@section('content')
     <div class="container mt-4">
         <div class="row mb-0">
             <div class="col-lg-9 col-xl-10">
