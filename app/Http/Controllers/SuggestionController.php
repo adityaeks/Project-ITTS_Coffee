@@ -13,6 +13,11 @@ class SuggestionController extends Controller
      */
     public function index()
     {
+
+    if (auth()->user()->email !== 'admin@gmail.com') {
+        return redirect()->route('home')->with('message', 'Anda bukan admin');
+    }
+
     $suggestions = Suggestion::all();
     $pageTitle = 'Suggestion List';
 
