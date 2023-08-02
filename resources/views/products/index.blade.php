@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('Content')
+@extends('layouts.admin')
+@section('content')
     <div class="container mt-4">
         <div class="row mb-0">
             <div class="col-lg-9 col-xl-10">
@@ -32,8 +32,15 @@
                     @if (!empty($products) && count($products) > 0)
                         @foreach ($products as $product)
                             <tr>
-                                <td><img class="image" src="{{ asset('images/' . $product->image) }}" alt="tes">
+                                <td>
+                                    @if ($product->image)
+                                        <img class="image" src="{{ asset('storage/images/' . $product->image) }}"
+                                            alt="{{ $product->name }}" style="width: 100px; height: 100px;">
+                                    @else
+                                        <span>No Image</span>
+                                    @endif
                                 </td>
+
                                 <td>{{ $product->name }}</td>
                                 <td>{{ number_format($product->price, 0, ',', '.') }}</td>
                                 <td>{{ $product->kategory->name }}</td>
@@ -49,7 +56,8 @@
                                             <form action="{{ route('products.destroy', $product->id) }}" method="POST">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="btn btn-outline-dark btn-sm me-2" data-name="{{ $product->name.' '.$product->price }}"><i
+                                                <button type="submit" class="btn btn-outline-dark btn-sm me-2"
+                                                    data-name="{{ $product->name . ' ' . $product->price }}"><i
                                                         class="bi-trash"></i></button>
                                             </form>
                                         </div>
@@ -64,9 +72,9 @@
     </div>
     @push('scripts')
         <script type="module">
-        $(document).ready(function() {
-            $('#productTable').DataTable();
-        });
-    </script>
+            $(document).ready(function() {
+                $('#productTable').DataTable();
+            });
+        </script>
     @endpush
 @endsection

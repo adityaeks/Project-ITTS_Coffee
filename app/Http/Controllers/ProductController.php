@@ -97,7 +97,10 @@ class ProductController extends Controller
     /**
      * Memperbarui produk yang ada di dalam database.
      */
-    public function update(Request $request, $id)
+    /**
+ * Memperbarui produk yang ada di dalam database.
+ */
+public function update(Request $request, $id)
 {
     $product = Product::find($id);
 
@@ -106,6 +109,7 @@ class ProductController extends Controller
         'price' => 'required|numeric',
         'kategory' => 'required',
         'subkategory' => 'required',
+        'image' => 'image|mimes:jpeg,png,jpg,gif|max:3148', // Tambahkan validasi gambar di sini
     ]);
 
     $product->name = $request->name;
@@ -131,6 +135,7 @@ class ProductController extends Controller
 
     return redirect()->route('products.index')->with('success', 'Produk telah diperbarui');
 }
+
 
     /**
      * Menghapus produk dari database.
