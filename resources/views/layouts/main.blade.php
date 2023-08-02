@@ -85,7 +85,7 @@
 </div>
 {{-- end navbar --}}
 
-@yield('content')
+@yield('Content')
 
 <!-- Footer -->
 <footer class="footer navbar navbar-expand-lg" style="width: 100%; height: 140px; background-color: #A27B5C">
