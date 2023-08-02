@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 @section('content')
 
@@ -121,4 +122,5 @@
 </center>
 
 <script src="{{ Vite::asset ('resources/js/script.js') }}"></script>
+
 @endsection

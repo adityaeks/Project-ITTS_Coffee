@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(){
-        $pageTitle = 'ITTS Coffee';
-        return view('welcome', compact('pageTitle'));
+
+    function index()
+    {
+        $pageTitle = 'Home';
+
+        return view('home', ['pageTitle' => $pageTitle]);
+
     }
 }
