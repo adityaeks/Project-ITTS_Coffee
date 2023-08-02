@@ -26,6 +26,10 @@ Route::get('/', [LoginController::class, 'showLoginForm'])->middleware('guest');
 
 Auth::routes();
 
+    Route::get('about', function () {
+        return view('about');
+    })->name('about');
+
 // Grouping routes with 'auth' middleware
 Route::middleware(['auth'])->group(function () {
     // start route dari home
