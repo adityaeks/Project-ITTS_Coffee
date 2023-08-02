@@ -65,6 +65,8 @@ class ProductController extends Controller
 
     $product->save();
 
+    Alert::success('Added Successfully', 'Products Data Added Successfully.');
+
     return redirect()->route('products.index')->with('success', 'Produk telah ditambahkan');
 }
 
@@ -97,7 +99,10 @@ class ProductController extends Controller
     /**
      * Memperbarui produk yang ada di dalam database.
      */
-    public function update(Request $request, $id)
+    /**
+ * Memperbarui produk yang ada di dalam database.
+ */
+public function update(Request $request, $id)
 {
     $product = Product::find($id);
 
@@ -106,6 +111,7 @@ class ProductController extends Controller
         'price' => 'required|numeric',
         'kategory' => 'required',
         'subkategory' => 'required',
+        'image' => 'image|mimes:jpeg,png,jpg,gif|max:3148', // Tambahkan validasi gambar di sini
     ]);
 
     $product->name = $request->name;
@@ -129,8 +135,11 @@ class ProductController extends Controller
 
     $product->save();
 
+    Alert::success('Changed Successfully', 'Products Data Changed Successfully.');
+
     return redirect()->route('products.index')->with('success', 'Produk telah diperbarui');
 }
+
 
     /**
      * Menghapus produk dari database.
@@ -146,7 +155,7 @@ class ProductController extends Controller
         // Hapus data produk dari database
         $product->delete();
 
-        Alert::success('Deleted Successfully', 'Employee Data Deleted Successfully.');
+        Alert::success('Deleted Successfully', 'Products Data Deleted Successfully.');
 
         return redirect()->route('products.index')->with('success', 'Produk telah dihapus');
     }
@@ -169,10 +178,7 @@ class ProductController extends Controller
 
     return view('products.drink', compact('pageTitle', 'products'));
 }
-public function exportExcel()
-{
-    return Excel::download(new ProductsExport, 'products.xlsx');
-}
+
 
 
 

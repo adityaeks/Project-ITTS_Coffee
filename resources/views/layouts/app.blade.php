@@ -12,11 +12,12 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     @vite('resources/sass/app.scss')
     @vite('resources/css/app.css')
+    <link rel="stylesheet" href="{{ Vite::asset('style.css') }}">
+
 </head>
 
 <body>
     @vite('resources/sass/app.scss')
-    @yield('Content')
     @vite('resources/js/app.js')
     @include('sweetalert::alert')
     @stack('scripts')

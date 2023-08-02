@@ -23,7 +23,7 @@
                         <a class="nav-link" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">About</a>
+                        <a class="nav-link" href="#">About</a>
                     </li>
 
                     <li class="nav-item">
@@ -36,16 +36,53 @@
                         <a class="nav-link" href="{{ route('suggestion.create') }}">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">User</a>
+                        <a class="nav-link" href="{{ route('suggestion.index') }}">User</a>
+                    </li>
+                    <li class="nav-item">
+@guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
                     </li>
                 </ul>
             </div>
+
+
+
+
         </div>
     </nav>
 </div>
 {{-- end navbar --}}
 
-@yield('content')
+@yield('Content')
 
 <!-- Footer -->
 <footer class="footer navbar navbar-expand-lg" style="width: 100%; height: 140px; background-color: #A27B5C">
@@ -89,10 +126,6 @@
 
 
 
-@vite('resources/js/app.js')
-</body>
-
-</html>
 @vite('resources/js/app.js')
 </body>
 

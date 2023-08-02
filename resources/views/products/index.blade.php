@@ -1,33 +1,46 @@
-@extends('layouts.app')
-@section('Content')
+@extends('layouts.admin')
+@section('content')
     <div class="container mt-4">
         <div class="row mb-0">
             <div class="col-lg-9 col-xl-10">
                 <h4 class="mb-3">{{ $pageTitle }}</h4>
             </div>
-            <div class="col-lg col-xl-3 d-flex justify-content-end">
-                <div class="d-flex gap-2">
-                    <a href="{{ route('products.exportExcel') }}" class="btn btn-outline-success flex-fill">
-                        <i class="bi bi-download me-1"></i> to Excel
-                    </a>
+            <div class="col-lg col-xl-3">
+                <div class="d-flex">
+
                     <a href="{{ route('products.create') }}" class="btn btn-primary flex-fill">Create Product</a>
                 </div>
             </div>
 
         </div>
         <hr>
-        <div class="table-responsive border p-3 rounded-3">
-            <table class="table table-bordered table-hover table-striped mb-0 bg-white datatable" id="productTable">
-                <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Harga</th>
-                        <th>Kategori</th>
-                        <th>Sub-Kategori</th>
-                        <th></th>
-                    </tr>
-                </thead>
+        <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                    <thead>
+                        <tr>
+                            <th
+                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Image
+                            </th>
+                            <th
+                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                Nama</th>
+                            <th
+                            <th
+                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                Harga</th>
+                            <th
+                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                Kategori</th>
+                            <th
+                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                Sub-Kategori</th>
+
+                            <th class="text-secondary opacity-7"></th>
+                        </tr>
+                    </thead>
+
                 <tbody>
                     @if (!empty($products) && count($products) > 0)
                         @foreach ($products as $product)
