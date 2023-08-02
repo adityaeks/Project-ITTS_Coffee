@@ -35,9 +35,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('suggestion.create') }}">Contact</a>
                     </li>
+                       {{-- Tampilkan link "User" hanya jika pengguna memiliki email "admin@gmail.com" --}}
+                @if (auth()->check() && auth()->user()->email === 'admin@gmail.com')
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('suggestion.index') }}">User</a>
+                        <a class="nav-link" href="{{ route('suggestion.index') }}">Dashboard</a>
                     </li>
+                @endif
                     <li class="nav-item">
 @guest
                             @if (Route::has('login'))
