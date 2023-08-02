@@ -65,6 +65,8 @@ class ProductController extends Controller
 
     $product->save();
 
+    Alert::success('Added Successfully', 'Products Data Added Successfully.');
+
     return redirect()->route('products.index')->with('success', 'Produk telah ditambahkan');
 }
 
@@ -133,6 +135,8 @@ public function update(Request $request, $id)
 
     $product->save();
 
+    Alert::success('Changed Successfully', 'Products Data Changed Successfully.');
+
     return redirect()->route('products.index')->with('success', 'Produk telah diperbarui');
 }
 
@@ -151,7 +155,7 @@ public function update(Request $request, $id)
         // Hapus data produk dari database
         $product->delete();
 
-        Alert::success('Deleted Successfully', 'Employee Data Deleted Successfully.');
+        Alert::success('Deleted Successfully', 'Products Data Deleted Successfully.');
 
         return redirect()->route('products.index')->with('success', 'Produk telah dihapus');
     }
@@ -174,10 +178,7 @@ public function update(Request $request, $id)
 
     return view('products.drink', compact('pageTitle', 'products'));
 }
-public function exportExcel()
-{
-    return Excel::download(new ProductsExport, 'products.xlsx');
-}
+
 
 
 

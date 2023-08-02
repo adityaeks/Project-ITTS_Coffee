@@ -1,6 +1,8 @@
 @extends('layouts.admin')
+
 @section('content')
-        {{-- START CONTENT INTI --}}
+    {{-- START CONTENT INTI --}}
+    <div class="home-section">
         <div class="container-fluid py-4">
             @if (session()->has('success'))
                 <div class="row">
@@ -45,8 +47,7 @@
                                                 <td>{{ $suggestion->email }}</td>
                                                 <td>{{ $suggestion->message }}</td>
                                                 <td>
-                                                    <a href="{{ route('suggestion.edit', $suggestion->id) }}"
-                                                        class="btn btn-warning">Edit</a>
+                                                    
                                                     <form action="{{ route('suggestion.destroy', $suggestion->id) }}"
                                                         method="POST" class="d-inline">
                                                         @csrf
@@ -65,5 +66,6 @@
                 </div>
             </div>
         </div>
-        {{-- END CONTENT INTI --}}
+    </div>
+    {{-- END CONTENT INTI --}}
 @endsection
