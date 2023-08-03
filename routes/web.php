@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
@@ -26,14 +27,13 @@ Route::get('/', [LoginController::class, 'showLoginForm'])->middleware('guest');
 
 Auth::routes();
 
-    Route::get('about', function () {
-        return view('about');
-    })->name('about');
 
 // Grouping routes with 'auth' middleware
 Route::middleware(['auth'])->group(function () {
     // start route dari home
     Route::get('home', [HomeController::class, 'index'])->name('home');
+
+    Route::get('about', [AboutController::class, 'index'])->name('about');
 
     Route::get('contact', [ContactController::class, 'index'])->name('contact');
     // end route dari home
@@ -52,6 +52,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('exportExcel', [ProductController::class, 'exportExcel'])->name('products.exportExcel');
+    Route::get('exportPdf', [ProductController::class, 'exportPdf'])->name('products.exportPdf');
 
     // coba
     Route::get('/upload-example', function() {
