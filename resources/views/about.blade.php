@@ -1,109 +1,59 @@
 @extends('layouts.main')
 
 @section('content')
+    {{-- carousel about --}}
+    <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner" style="height: 120px;">
+            <div class="carousel-item active">
+                <img src="{{ Vite::asset('resources/images/bgabout.png') }}" class="d-block w-100" alt="...">
+            </div>
 
-        <div class="carousel-inner" style="height: 120px;>
-        <div class="carousel-item active">
-            <img src="{{ Vite::asset('resources/images/bgcontact.png') }}" class="d-block w-100" alt="...">
+            <div class="carousel-item">
+                <img src="{{ Vite::asset('resources/images/bgabout2.png') }}" class="d-block w-100" alt="...">
+            </div>
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 
-    {{-- end navbar --}}
+    {{-- carousel about --}}
 
 
     {{-- START CONTENT --}}
     <div class="container-sm mt-5 mb-5 ">
-<form action="{{ route('suggestion.store') }}" method="POST">
-            @csrf
-            <div class="row justify-content-center">
-                <div class="p-5 bg-body-secondary rounded-3 border col-xl-6">
+        @csrf
+        <div class="row justify-content-center">
+            <div class="p-5 bg-body-secondary rounded-3 border col-xl-6">
+                <h1 style="text-align: center; font-weight: bold;">ITTS COFFEE</h1>
+                <hr>
+                <p style="text-align: justify">ITTS Coffee adalah tempat nongkrong yang asik dengan menyajikan minuman berkualitas tinggi dengan cita
+                    rasa yang unik dan menyenangkan. Pada kopi-nya sendiri kami menggunakan biji kopi pilihan yang diperoleh
+                    dari berbagai daerah penghasil kopi terbaik di dunia. Dengan kombinasi antara keahlian kopi yang
+                    mendalam, teknologi modern, dan dedikasi terhadap kepuasan pelanggan, kami berusaha untuk memberikan
+                    pengalaman kopi yang luar biasa kepada setiap pelanggan kami.
+                    <br>
+                    <br>
+                    Produk dan Layanan:
+                    <br>
+                    1. Kopi Segar: ITTS Coffee menawarkan berbagai macam jenis kopi segar yang dipanggang secara teratur
+                    untuk menjaga kualitasnya. Kami menyediakan biji kopi single origin dan campuran dengan berbagai tingkat
+                    kepekatan dan karakteristik rasa yang berbeda.
+                    <br>
+                    2. Minuman Khas: Selain kopi hitam, ITTS Coffee juga menyajikan beragam minuman khas seperti cappuccino, latte, espresso, mocaccino, dan banyak lagi. Kami menggunakan teknik penyajian yang terampil dan bahan-bahan berkualitas tinggi untuk menciptakan minuman kopi yang lezat.
+<br>
+3. Camilan dan Makanan Ringan: Kami juga menawarkan camilan dan makanan ringan yang cocok untuk menemani secangkir kopi. Mulai dari roti panggang, kue-kue, croissant, hingga sandwich, kami menyajikan pilihan yang beragam untuk memenuhi selera pelanggan.
 
-                    @if ($errors->any())
-                        @foreach ($errors->all() as $error)
-                            <div class="alert alert-danger alert-dismissible fade show">
-                                {{ $error }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endforeach
-                    @endif
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <!-- Empty column on the left -->
-                            <div class="card mb-4" style="height: 16vh; border: 1px solid #A52A2A;">
-
-                                <ul class="list-group ms-3 small mt-2">
-                                    {{-- <li class="list-group-item"> --}}
-                                    <i class="bi bi-envelope-fill fs-4"></i>
-                                    <li class="list-group"> <strong>Mail Address</strong></li>
-                                    <li class="list-group"> <strong>ITTSCoffee@gmail.com</strong></li>
-                                </ul>
-                            </div>
-                            <div class="card mb-4" style="height: 16vh; border: 1px solid #A52A2A;">
-                                <ul class="list-group ms-3 small mt-2">
-                                    {{-- <li class="list-group-item"> --}}
-                                    <i class="bi bi-telephone-fill fs-4"></i>
-                                    <li class="list-group "><strong>Phone Number</strong></li>
-                                    <li class="list-group"><strong>+62 812-3456-7890</strong></li>
-                                </ul>
-                            </div>
-                            <div class="card mb-4" style="height: 16vh; border: 1px solid #A52A2A;">
-                                <ul class="list-group ms-3 small mt-2">
-                                    {{-- <li class="list-group-item"> --}}
-                                    <i class="bi bi-geo-alt-fill fs-4"></i>
-                                    <li class="list-group"> <strong>Contact Address</strong></li>
-                                    <li class="list-group"> <strong>Jl. Ketintang No.156</strong> </li>
-                                </ul>
-                            </div>
-
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <h4>Kritik & Saran</h4>
-                            </div>
-                            <div class="mb-3" style="border: 1px solid #A52A2A; border-radius: 7px;">
-                                <input class="form-control" type="text" name="name" id="name"
-                                    value="" placeholder="Enter Name" style="height: 6vh;">
-                            </div>
-                            <div class="mb-3" style="border: 1px solid #A52A2A; border-radius: 7px;">
-                                <input class="form-control" type="text" name="email" id="email" value=""
-                                    placeholder="Enter Email" style="height: 6vh;">
-                            </div>
-                            <div class="mb-2" style="border: 1px solid #A52A2A; border-radius: 7px;">
-                                <textarea class="form-control resize-none" name="message" id="message" rows="6"
-                                    placeholder="Enter Your Suggestion"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <button type="submit"
-                                    class="btn btn-danger btn-lg d-flex align-items-center justify-content-center"
-                                    style="width: 60px; height: 30px;">
-                                    <span style="font-size: 14px;">Send</span>
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="container">
-                        <div class="d-flex justify-content-center">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.3903265077283!2d112.72662707335446!3d-7.309971792697908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fbf613ba5dd5%3A0xe15ebdec39ca0293!2sITTS%20Coffee!5e0!3m2!1sen!2sid!4v1689754225696!5m2!1sen!2sid"
-                                    width="470" height="200" style="border:1;" allowfullscreen=""
-                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                </div>
+                </p>
             </div>
-        </form>
+        </div>
+
     </div>
 
     {{-- END CONTENT --}}
-
 @endsection

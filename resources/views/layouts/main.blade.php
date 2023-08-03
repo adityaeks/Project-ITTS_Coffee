@@ -84,6 +84,8 @@
 
 @yield('content')
 
+
+
 <!-- Footer -->
 <footer class="footer navbar navbar-expand-lg" style="width: 100%; height: 140px; background-color: #A27B5C">
     <div class="">
