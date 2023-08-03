@@ -6,16 +6,17 @@
                 <h4 class="mb-3">{{ $pageTitle }}</h4>
             </div>
             <div class="col-lg col-xl-3 d-flex justify-content-end">
-                <div class="d-flex gap-2">
+                <div class="d-flex gap-2 align-items-center"> <!-- Tambahkan kelas 'align-items-center' untuk mengatur vertikal align ikon -->
                     <a href="{{ route('products.exportExcel') }}" class="btn btn-success flex-fill">
-                        <i class="bi bi-download me-1"></i> to Excel
+                        <i class="fas fa-file-excel"></i> Excel
                     </a>
                     <a href="{{ route('products.exportPdf') }}" class="btn btn-danger flex-fill">
-                        <i class="bi bi-download me-1"></i> to Pdf
+                        <i class="fas fa-file-pdf"></i> Pdf
                     </a>
                     <a href="{{ route('products.create') }}" class="btn btn-primary flex-fill">Create Product</a>
                 </div>
             </div>
+
 
         </div>
         <hr>
@@ -52,9 +53,8 @@
                                 <td>
                                     <div class="d-flex">
                                         {{-- Edit Button --}}
-                                        <a href="{{ route('products.edit', $product->id) }}"
-                                            class="btn btn-outline-dark btn-sm me-2">
-                                            <i class="bi-pencil-square"></i> Edit
+                                        <a href="{{ route('products.edit', $product->id) }}" class="btn-warning btn btn-outline-dark btn-sm me-2">
+                                            <i class="fas fa-pencil-alt"></i>
                                         </a>
 
                                         {{-- Delete Button --}}
@@ -62,14 +62,13 @@
                                             <form action="{{ route('products.destroy', $product->id) }}" method="POST">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="btn btn-danger btn-sm me-2"
-                                                    data-name="{{ $product->name . ' ' . $product->price }}">
-                                                    <i class="bi-trash"></i> Delete
+                                                <button type="submit" class="btn btn-danger btn-sm me-2" data-name="{{ $product->name . ' ' . $product->price }}">
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
                                         </div>
-
                                     </div>
+
                                 </td>
                             </tr>
                         @endforeach

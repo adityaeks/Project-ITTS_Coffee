@@ -107,35 +107,41 @@ class ProductController extends Controller
     /**
  * Memperbarui produk yang ada di dalam database.
  */
- public function update(Request $request, $id)
-    {
-        $product = Product::find($id);
+public function update(Request $request, $id)
+{
+    $product = Product::find($id);
 
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required|numeric',
-            'kategory' => 'required',
-            'subkategory' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:3148', // Tambahkan validasi gambar di sini
-        ]);
+    $request->validate([
+        'name' => 'required',
+        'price' => 'required|numeric',
+        'kategory' => 'required',
+        'subkategory' => 'required',
+        'image' => 'image|mimes:jpeg,png,jpg,gif|max:3148',
+    ]);
 
-        // Update other fields
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->kategorys_id = $request->kategory;
-        $product->subKategorys_id = $request->subkategory;
-
-        // Handle image upload
-        if ($request->hasFile('image')) {
-            $product->image = $product->storeImage($request->file('image'));
-        }
-
-        $product->save();
-
-        Alert::success('Added Successfully', 'Prdoucts Update Added Successfully.');
-
-        return redirect()->route('products.index')->with('success', 'Produk telah diperbarui');
+    // Delete foto lama
+    if ($request->hasFile('image') && $product->image) {
+        Storage::delete($product->image); // laravel storage
     }
+
+    // Update
+    $product->name = $request->name;
+    $product->price = $request->price;
+    $product->kategorys_id = $request->kategory;
+    $product->subKategorys_id = $request->subkategory;
+
+    // Handle image upload
+    if ($request->hasFile('image')) {
+        $product->image = $product->storeImage($request->file('image'));
+    }
+
+    $product->save();
+
+    Alert::success('Change Successfully', 'Products Update Successfully.');
+
+    return redirect()->route('products.index')->with('success', 'Produk telah diperbarui');
+}
+
 
 
     /**

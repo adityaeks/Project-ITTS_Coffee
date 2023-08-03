@@ -45,8 +45,6 @@
                                                 <td>{{ $suggestion->email }}</td>
                                                 <td>{{ $suggestion->message }}</td>
                                                 <td>
-                                                    <a href="{{ route('suggestion.edit', $suggestion->id) }}"
-                                                        class="btn btn-warning">Edit</a>
                                                     <form action="{{ route('suggestion.destroy', $suggestion->id) }}"
                                                         method="POST" class="d-inline">
                                                         @csrf
