@@ -1,9 +1,5 @@
 @extends('layouts.app')
 @section('Content')
-    {{-- @php
-        dd($product->kategorys, $product->subkategorys);
-    @endphp --}}
-
     <div class="container-sm mt-5">
         <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -27,23 +23,22 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input class="form-control" type="text" name="name" id="name"
-                                value="{{ $product->name }}" placeholder="Nama Product">
+                            <input class="form-control" type="text" name="name" id="name" value="{{ $product->name }}"
+                                placeholder="Nama Product">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="price" class="form-label">Harga</label>
-                            <input class="form-control" type="text" name="price" id="price"
-                                value="{{ $product->price }}" placeholder="Harga Product">
+                            <input class="form-control" type="text" name="price" id="price" value="{{ $product->price }}"
+                                placeholder="Harga Product">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="kategory" class="form-label">kategory</label>
-                            <select name="kategory" class="form-select" required>
-                                <option value="" disabled selected>Pilih Kategori</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}"
-                                        {{ $product->kategorys_id == $category->id ? 'selected' : '' }}>
-                                        {{ $category->name }}
-                                    </option>
+                            <select name="kategory" id="kategory" class="form-select">
+                                <option value="" disabled selected>Pilih SubKategori</option>
+                                @foreach ($categories as $kategory)
+                                    <option value="{{ $kategory->id }}"
+                                        {{ $product->kategorys_id == $kategory->id ? 'selected' : '' }}>
+                                        {{ $kategory->code . ' - ' . $kategory->name }}</option>
                                 @endforeach
                             </select>
                             @error('kategory')
@@ -52,33 +47,24 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="subkategory" class="form-label">Sub kategory</label>
-                            <select name="subkategory" class="form-select" required>
+                            <select name="subkategory" id="subkategory" class="form-select">
                                 <option value="" disabled selected>Pilih SubKategori</option>
-                                @foreach ($subcategories as $subcategory)
-                                    <option value="{{ $subcategory->id }}"
-                                        {{ $product->subKategorys_id == $subcategory->id ? 'selected' : '' }}>
-                                        {{ $subcategory->name }}
-                                    </option>
+                                @foreach ($subcategories as $subkategory)
+                                    <option value="{{ $subkategory->id }}"
+                                        {{ $product->subKategorys_id == $subkategory->id ? 'selected' : '' }}>
+                                        {{ $subkategory->code . ' - ' . $subkategory->name }}</option>
                                 @endforeach
                             </select>
                             @error('subkategory')
-                                <div class="t   ext-danger"><small>{{ $message }}</small></div>
+                                <div class="text-danger"><small>{{ $message }}</small></div>
                             @enderror
                         </div>
-
                         <div class="col-md-12">
                             <label for="image" class="form-label">Foto</label>
-                            <input type="file" class="form-control" id="image" name="image"
-                                onchange="previewImage(event)">
-                            @if ($product->image)
-                                <img id="preview" src="{{ asset('images/' . $product->image) }}" alt="Preview"
-                                    style="max-width: 200px; margin-top: 10px;">
-                            @else
-                                <img id="preview" src="" alt="Preview"
-                                    style="max-width: 200px; margin-top: 10px; display: none;">
-                            @endif
+                            <input type="file" class="form-control" id="image" name="image" onchange="previewImage(event)">
+                            <img id="preview" src="{{ asset('storage/images/' . $product->image) }}" alt="Preview"
+                                style="display: block; max-width: 200px; margin-top: 10px;">
                         </div>
-
                     </div>
                     <hr>
                     <div class="row">
@@ -111,8 +97,4 @@
             }
         }
     </script>
-
-
-
-
 @endsection

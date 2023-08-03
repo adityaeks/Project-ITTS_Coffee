@@ -102,41 +102,33 @@ class ProductController extends Controller
     /**
  * Memperbarui produk yang ada di dalam database.
  */
-public function update(Request $request, $id)
-{
-    $product = Product::find($id);
+ public function update(Request $request, $id)
+    {
+        $product = Product::find($id);
 
-    $request->validate([
-        'name' => 'required',
-        'price' => 'required|numeric',
-        'kategory' => 'required',
-        'subkategory' => 'required',
-        'image' => 'image|mimes:jpeg,png,jpg,gif|max:3148', // Tambahkan validasi gambar di sini
-    ]);
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'kategory' => 'required',
+            'subkategory' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:3148', // Tambahkan validasi gambar di sini
+        ]);
 
-    $product->name = $request->name;
-    $product->price = $request->price;
-    $product->kategorys_id = $request->kategory;
-    $product->subKategorys_id = $request->subkategory;
+        // Update other fields
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->kategorys_id = $request->kategory;
+        $product->subKategorys_id = $request->subkategory;
 
-    // Cek apakah ada file gambar baru diunggah
-    if ($request->hasFile('image')) {
-        // Hapus foto lama dari storage jika ada
-        if (!empty($product->image)) {
-            Storage::delete('images/' . $product->image);
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $product->image = $product->storeImage($request->file('image'));
         }
 
-        // Unggah foto baru dan simpan nama file ke dalam database
-        $file = $request->file('image');
-        $file_name = time() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('images', $file_name);
-        $product->image = $file_name;
+        $product->save();
+
+        return redirect()->route('products.index')->with('success', 'Produk telah diperbarui');
     }
-
-    $product->save();
-
-    return redirect()->route('products.index')->with('success', 'Produk telah diperbarui');
-}
 
 
     /**
