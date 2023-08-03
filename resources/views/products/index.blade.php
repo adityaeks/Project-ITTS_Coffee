@@ -52,7 +52,8 @@
                                 <td>
                                     <div class="d-flex">
                                         {{-- Edit Button --}}
-                                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-outline-dark btn-sm me-2">
+                                        <a href="{{ route('products.edit', $product->id) }}"
+                                            class="btn btn-outline-dark btn-sm me-2">
                                             <i class="bi-pencil-square"></i> Edit
                                         </a>
 
@@ -61,12 +62,13 @@
                                             <form action="{{ route('products.destroy', $product->id) }}" method="POST">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="btn btn-outline-dark btn-sm me-2"
+                                                <button type="submit" class="btn btn-danger btn-sm me-2"
                                                     data-name="{{ $product->name . ' ' . $product->price }}">
                                                     <i class="bi-trash"></i> Delete
                                                 </button>
                                             </form>
                                         </div>
+
                                     </div>
                                 </td>
                             </tr>

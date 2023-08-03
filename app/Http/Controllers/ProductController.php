@@ -70,6 +70,8 @@ class ProductController extends Controller
 
     $product->save();
 
+    Alert::success('Changed Successfully', 'Products Data Added Successfully.');
+
     return redirect()->route('products.index')->with('success', 'Produk telah ditambahkan');
 }
 
@@ -129,6 +131,8 @@ class ProductController extends Controller
         }
 
         $product->save();
+
+        Alert::success('Added Successfully', 'Prdoucts Update Added Successfully.');
 
         return redirect()->route('products.index')->with('success', 'Produk telah diperbarui');
     }
