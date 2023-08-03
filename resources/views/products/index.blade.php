@@ -7,8 +7,11 @@
             </div>
             <div class="col-lg col-xl-3 d-flex justify-content-end">
                 <div class="d-flex gap-2">
-                    <a href="{{ route('products.exportExcel') }}" class="btn btn-outline-success flex-fill">
+                    <a href="{{ route('products.exportExcel') }}" class="btn btn-success flex-fill">
                         <i class="bi bi-download me-1"></i> to Excel
+                    </a>
+                    <a href="{{ route('products.exportPdf') }}" class="btn btn-danger flex-fill">
+                        <i class="bi bi-download me-1"></i> to Pdf
                     </a>
                     <a href="{{ route('products.create') }}" class="btn btn-primary flex-fill">Create Product</a>
                 </div>
@@ -48,17 +51,20 @@
 
                                 <td>
                                     <div class="d-flex">
-                                        {{-- <a href="#" class="btn btn-outline-dark btn-sm me-2"><i
-                                            class="bi-person-lines-fill"></i></a> --}}
-                                        <a href="{{ route('products.edit', $product->id) }}"
-                                            class="btn btn-outline-dark btn-sm me-2"><i class="bi-pencil-square"></i></a>
+                                        {{-- Edit Button --}}
+                                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-outline-dark btn-sm me-2">
+                                            <i class="bi-pencil-square"></i> Edit
+                                        </a>
+
+                                        {{-- Delete Button --}}
                                         <div>
                                             <form action="{{ route('products.destroy', $product->id) }}" method="POST">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-outline-dark btn-sm me-2"
-                                                    data-name="{{ $product->name . ' ' . $product->price }}"><i
-                                                        class="bi-trash"></i></button>
+                                                    data-name="{{ $product->name . ' ' . $product->price }}">
+                                                    <i class="bi-trash"></i> Delete
+                                                </button>
                                             </form>
                                         </div>
                                     </div>

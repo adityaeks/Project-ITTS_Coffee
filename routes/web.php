@@ -52,6 +52,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('exportExcel', [ProductController::class, 'exportExcel'])->name('products.exportExcel');
+    Route::get('exportPdf', [ProductController::class, 'exportPdf'])->name('products.exportPdf');
 
     // coba
     Route::get('/upload-example', function() {

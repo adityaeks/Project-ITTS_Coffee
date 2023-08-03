@@ -11,6 +11,8 @@ use App\Exports\ProductsExport;
 use App\Models\Kategory;
 use App\Models\subKategory;
 use Illuminate\Support\Facades\Storage;
+use PDF;
+
 
 class ProductController extends Controller
 {
@@ -178,6 +180,17 @@ public function exportExcel()
 {
     return Excel::download(new ProductsExport, 'products.xlsx');
 }
+
+public function exportPdf()
+{
+    $products = Product::all();
+
+    $pdf = PDF::loadView('products.export_pdf', compact('products'));
+
+    return $pdf->download('products.pdf');
+}
+
+
 
 
 

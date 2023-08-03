@@ -62,7 +62,7 @@
                                 @endforeach
                             </select>
                             @error('subkategory')
-                                <div class="text-danger"><small>{{ $message }}</small></div>
+                                <div class="t   ext-danger"><small>{{ $message }}</small></div>
                             @enderror
                         </div>
 
